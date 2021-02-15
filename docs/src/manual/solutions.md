@@ -118,10 +118,10 @@ end
 ```
 
 !!! warning
-    Querying solution information after modifying a solved model is undefined 
+    Querying solution information after modifying a solved model is undefined
     behavior, and solvers may throw an error or return incorrect results.
-    Modifications include adding, deleting, or modifying any variable, 
-    objective, or constraint. Instead of modify then query, query the results 
+    Modifications include adding, deleting, or modifying any variable,
+    objective, or constraint. Instead of modify then query, query the results
     first, then modify the problem. For example:
     ```julia
     model = Model(GLPK.Optimizer)
@@ -324,11 +324,11 @@ Functions for querying the solutions, e.g., [`primal_status`](@ref) and
 used to specify which result to return.
 
 !!! warning
-    Even if [`termination_status`](@ref) is `MOI.OPTIMAL`, some of the returned 
+    Even if [`termination_status`](@ref) is `MOI.OPTIMAL`, some of the returned
     solutions may be suboptimal! However, if the solver found at least one
     optimal solution, then `result = 1` will always return an optimal solution.
-    Use [`objective_value`](@ref) to assess the quality of the remaining 
-    solutions. 
+    Use [`objective_value`](@ref) to assess the quality of the remaining
+    solutions.
 
 ```julia
 using JuMP
@@ -352,4 +352,26 @@ for i in 2:result_count(model)
         print("Solution $(i) is also optimal!")
     end
 end
+```
+
+## Checking feasibility of solutions
+
+To check the feasibility of a primal solution, use
+[`primal_feasibility_report`](@ref). The returned `report` is `nothing` if the
+point is feasible. Otherwise, it is a dictionary mapping the infeasible
+constraint references to the distance between the point and the nearest point in
+the set.
+
+```@example
+using JuMP
+model = Model()
+@variable(model, x >= 1, Int)
+@constraint(model, c1, x <= 1.95)
+point = Dict(x => 2.5)
+report = primal_feasibility_report(model, point)
+```
+
+To use the point from a previous solve, use:
+```julia
+point = Dict(v => value(v) for v in all_variables(model))
 ```
