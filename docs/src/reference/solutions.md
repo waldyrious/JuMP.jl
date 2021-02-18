@@ -75,6 +75,6 @@ lp_rhs_perturbation_range
 
 ## [Feasibility](@id ref_feasibility)
 
-```@docss
+```@docs
 primal_feasibility_report
 ```
