@@ -1,6 +1,21 @@
 JuMP release notes
 ==================
 
+Version 0.21.7 (In development)
+---------------------------------
+
+- New features:
+  * The `coefficient` function can be used to access coefficients of affine
+    and quadratic expressions.
+- Bug fixes:
+  * A better error message is thrown when `begin...end` blocks are used in 
+    nonlinear macros.
+  * Fixed a bug when forcing the container type in `@container`.
+  * Fixed a bug using `rad2deg` and `deg2rad` in nonlinear macros.
+- Documentation and general maintenance:
+  * Large sections of the documentation have been rewritten. Some tutorials 
+    have been moved from JuMPTutorials.
+
 Version 0.21.6 (January 29, 2021)
 ---------------------------------
 
