@@ -56,6 +56,7 @@ if !_FAST
     literate_directory(_EXAMPLE_DIR)
     literate_directory.(joinpath.(_EXAMPLE_DIR, _EXAMPLE_SUBDIR))
     literate_directory(joinpath(_TUTORIAL_DIR, "Getting started"))
+    literate_directory(joinpath(_TUTORIAL_DIR, "Mixed-integer linear programs"))
     literate_directory(joinpath(_TUTORIAL_DIR, "Optimization concepts"))
 end
 
@@ -109,7 +110,7 @@ makedocs(
                     sort(readdir(joinpath(_TUTORIAL_DIR, subdir))),
                 ),
             ),
-            ["Getting started", "Optimization concepts"],
+            ["Getting started", "Mixed-integer linear programs", "Optimization concepts"],
         ),
         "Examples" => vcat(
             _file_list(_EXAMPLE_DIR, "examples", ".md"),
